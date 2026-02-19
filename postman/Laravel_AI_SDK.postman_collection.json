@@ -1,0 +1,254 @@
+{
+	"info": {
+		"name": "Laravel AI SDK",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url_sdk_ai",
+			"value": "http://localhost:8000/api"
+		},
+		{
+			"key": "auth_token",
+			"value": ""
+		},
+		{
+			"key": "conversation_id",
+			"value": ""
+		}
+	],
+	"item": [
+		{
+			"name": "00 — Auth",
+			"item": [
+				{
+					"name": "Get Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const res = pm.response.json();",
+									"if (res.token) {",
+									"    pm.collectionVariables.set('auth_token', res.token);",
+									"    console.log('Token saved to collection variable');",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/token",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["token"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"test@example.com\"\n}"
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "01 — Introduction",
+			"item": [
+				{
+					"name": "Basic Prompt",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/prompt",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "prompt"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"prompt\": \"Define 'Service Provider' in Laravel in 10 words.\"\n}"
+						}
+					}
+				},
+				{
+					"name": "Prompt with Instructions",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/prompt",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "prompt"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"prompt\": \"What is middleware in Laravel?\",\n\t\"instructions\": \"Answer in one sentence only.\"\n}"
+						}
+					}
+				},
+				{
+					"name": "Prompt with Provider Selection",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/prompt",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "prompt"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"prompt\": \"Name 3 Laravel design patterns in a bullet list.\",\n\t\"instructions\": \"Be brief. No explanations.\",\n\t\"provider\": \"gemini\"\n}"
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "02 — Agents",
+			"item": [
+				{
+					"name": "Conversation — Start",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const res = pm.response.json();",
+									"if (res.conversation_id) {",
+									"    pm.collectionVariables.set('conversation_id', res.conversation_id);",
+									"    console.log('conversation_id saved: ' + res.conversation_id);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/conversation",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "conversation"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"prompt\": \"Calificá esta frase de apertura en una línea: 'Hola, noté que tu empresa está creciendo rápido.'\"\n}"
+						}
+					}
+				},
+				{
+					"name": "Conversation — Continue",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/conversation",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "conversation"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"prompt\": \"Cómo la mejorarías? En una oración.\",\n\t\"conversation_id\": \"{{conversation_id}}\"\n}"
+						}
+					}
+				},
+				{
+					"name": "Structured Output",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/structured",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "structured"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"prompt\": \"El vendedor saludó, preguntó por los problemas del cliente y ofreció una demo.\"\n}"
+						}
+					}
+				}
+			]
+		}
+	]
+}
