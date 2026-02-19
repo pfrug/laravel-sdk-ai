@@ -127,7 +127,7 @@ $response['score'];
 
 ## Configuración con atributos PHP
 
-El provider, modelo, temperatura y otros parámetros se configuran directamente en la clase con atributos PHP:
+El provider, modelo, temperatura y otros parámetros se configuran directamente en la clase con *PHP attributes*:
 ```php
 use Laravel\Ai\Attributes\MaxSteps;
 use Laravel\Ai\Attributes\MaxTokens;
@@ -149,7 +149,7 @@ class SalesCoach implements Agent
 }
 ```
 
-También hay dos atributos para selección automática de modelo sin especificar uno puntual:
+También hay dos *attributes* para selección automática de modelo sin especificar uno puntual:
 ```php
 #[UseCheapestModel]
 class SimpleSummarizer implements Agent
