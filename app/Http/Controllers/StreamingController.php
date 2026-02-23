@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-/**
- * Handles real-time streaming responses from AI providers.
- *
- * Responsibilities:
- * - Delivering token-by-token responses via Server-Sent Events (SSE).
- * - Broadcasting streamed content through Laravel's event system.
- * - Managing long-lived connections and graceful stream termination.
- */
+use App\Ai\Agents\LaravelMentor;
+use App\Http\Requests\ToolRequest;
+use Laravel\Ai\Responses\StreamableAgentResponse;
+
 class StreamingController extends Controller
 {
-    //
+    public function __invoke(ToolRequest $request): StreamableAgentResponse
+    {
+        return (new LaravelMentor)->stream($request->validated('prompt'));
+    }
 }

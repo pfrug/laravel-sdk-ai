@@ -4,7 +4,7 @@ La clase `Laravel\Ai\Image` permite generar imágenes usando los providers `open
 ```php
 use Laravel\Ai\Image;
 
-$image = Image::of('Una pizza sobre la mesada de la cocina')->generate();
+$image = Image::of('Un gato durmiendo sobre un teclado')->generate();
 
 $rawContent = (string) $image;
 ```
@@ -15,7 +15,7 @@ Los métodos `square()`, `portrait()` y `landscape()` controlan la relación de 
 ```php
 use Laravel\Ai\Image;
 
-$image = Image::of('Una pizza sobre la mesada de la cocina')
+$image = Image::of('Un gato durmiendo sobre un teclado')
     ->quality('high')
     ->landscape()
     ->generate();
@@ -23,7 +23,7 @@ $image = Image::of('Una pizza sobre la mesada de la cocina')
 
 El método `timeout()` especifica el timeout HTTP en segundos:
 ```php
-$image = Image::of('Una pizza sobre la mesada de la cocina')
+$image = Image::of('Un gato durmiendo sobre un teclado')
     ->timeout(120)
     ->generate();
 ```
@@ -35,7 +35,7 @@ Podemos adjuntar imágenes de referencia usando el método `attachments()`:
 use Laravel\Ai\Files;
 use Laravel\Ai\Image;
 
-$image = Image::of('Actualizá esta foto mía al estilo de una pintura impresionista.')
+$image = Image::of('Convertí esta foto en una pintura impresionista.')
     ->attachments([
         Files\Image::fromStorage('photo.jpg'),
         // Files\Image::fromPath('/home/laravel/photo.jpg'),
@@ -50,7 +50,7 @@ $image = Image::of('Actualizá esta foto mía al estilo de una pintura impresion
 
 Las imágenes generadas se pueden almacenar en el disco por defecto configurado en `config/filesystems.php`:
 ```php
-$image = Image::of('Una pizza sobre la mesada de la cocina')->generate();
+$image = Image::of('Un gato durmiendo sobre un teclado')->generate();
 
 $path = $image->store();
 $path = $image->storeAs('image.jpg');
@@ -65,7 +65,7 @@ La generación de imágenes se puede encolar:
 use Laravel\Ai\Image;
 use Laravel\Ai\Responses\ImageResponse;
 
-Image::of('Una pizza sobre la mesada de la cocina')
+Image::of('Un gato durmiendo sobre un teclado')
     ->portrait()
     ->queue()
     ->then(function (ImageResponse $image) {

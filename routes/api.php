@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\StreamingController;
+use App\Http\Controllers\ToolController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,9 +21,13 @@ Route::post('/token', function (Request $request) {
 
 Route::prefix('agent')->group(function () {
     Route::post('/prompt', [AgentController::class, 'prompt']);
-    Route::post('/tools', [AgentController::class, 'tools']);
-    Route::get('/stream', [AgentController::class, 'stream']);
     Route::post('/queue', [AgentController::class, 'queue']);
+
+    Route::get('/stream', StreamingController::class);
+    Route::post('/tools', ToolController::class);
+
+    Route::post('/image', [ImageController::class, 'generate']);
+    Route::post('/image/queue', [ImageController::class, 'queue']);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/conversation', [AgentController::class, 'conversation']);

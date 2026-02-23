@@ -322,7 +322,62 @@
 						},
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"prompt\": \"En dos oraciones, diferencia entre queues y events en Laravel.\"\n}"
+							"raw": "{\n\t\"prompt\": \"Explicame brevemente la diferencia entre queues y events en Laravel.\"\n}"
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "04 — Image Generation",
+			"item": [
+				{
+					"name": "Generate Image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/image",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "image"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"prompt\": \"Un gato durmiendo sobre un teclado\",\n\t\"format\": \"landscape\",\n\t\"quality\": \"low\"\n}"
+						}
+					}
+				},
+				{
+					"name": "Generate Image (Queue)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/image/queue",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "image", "queue"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"prompt\": \"Un gato durmiendo sobre un teclado\",\n\t\"format\": \"square\",\n\t\"quality\": \"low\"\n}"
 						}
 					}
 				}

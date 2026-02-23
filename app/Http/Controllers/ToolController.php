@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-/**
- * Handles AI tool invocation and function calling.
- *
- * Responsibilities:
- * - Registering and executing custom tool definitions.
- * - Orchestrating provider-native tool/function calls.
- * - Processing tool results and feeding them back into conversations.
- */
+use App\Ai\Agents\Calculator;
+use App\Http\Requests\ToolRequest;
+use Illuminate\Http\JsonResponse;
+
 class ToolController extends Controller
 {
-    //
+    public function __invoke(ToolRequest $request): JsonResponse
+    {
+        $response = (new Calculator)->prompt($request->validated('prompt'));
+
+        return response()->json([
+            'text' => $response->text,
+            'usage' => $response->usage,
+        ]);
+    }
 }
