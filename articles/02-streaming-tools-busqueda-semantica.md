@@ -1,4 +1,4 @@
-# Laravel AI SDK — Streaming, Tools y búsqueda semántica
+# Laravel AI SDK: Streaming, Tools y búsqueda semántica
 
 ## Streaming
 
