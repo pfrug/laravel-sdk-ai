@@ -79,5 +79,5 @@ El SDK se apoya en lo que Laravel ya ofrece: queues, filesystem, service contain
 
 En los próximos artículos vamos a ver agentes con clase propia, historial persistente, herramientas, salida estructurada y generación de imágenes.
 
-**Próximo artículo:** Laravel AI SDK - Agentes
+**Próximo artículo:** Laravel AI SDK: Agents
 En el próximo artículo voy a profundizar en el concepto de agentes como clases PHP: cómo definir sus instrucciones, gestionar el historial de conversación, estructurar salidas, configurar modelos mediante atributos y testear su comportamiento dentro de Laravel.

@@ -39,6 +39,8 @@ OPENAI_API_KEY=
 | GET | `/api/agent/stream` | Streaming SSE (LaravelMentor) | No |
 | POST | `/api/agent/tools` | Agente con tools (Calculator) | No |
 | POST | `/api/agent/queue` | Procesamiento en background | No |
+| POST | `/api/agent/image` | Generacion de imagen | No |
+| POST | `/api/agent/image/queue` | Generacion de imagen en background | No |
 
 ## Estructura
 
@@ -55,12 +57,16 @@ app/
 │       └── LogPrompts.php          # Log de prompts y respuestas
 ├── Http/
 │   ├── Controllers/
-│   │   └── AgentController.php
+│   │   ├── AgentController.php
+│   │   ├── ImageController.php
+│   │   ├── StreamingController.php
+│   │   └── ToolController.php
 │   └── Requests/
 │       ├── PromptRequest.php
 │       ├── ConversationRequest.php
 │       ├── StructuredRequest.php
-│       └── ToolRequest.php
+│       ├── ToolRequest.php
+│       └── ImageRequest.php
 ```
 
 ## Postman
@@ -72,3 +78,6 @@ La coleccion esta en `postman/Laravel_AI_SDK.postman_collection.json`. Importarl
 1. [Introduccion](articles/01-introduccion.md)
 2. [Agentes](articles/02-agents.md)
 3. [Streaming, Tools y Busqueda Semantica](articles/03-streaming-tools-busqueda-semantica.md)
+4. [Generacion de imagenes](articles/04-generacion-imagenes.md)
+5. [Audio TTS y STT](articles/05-audio-tts-stt.md)
+6. [Embeddings y Vector Stores](articles/06-embeddings-vector-stores.md)

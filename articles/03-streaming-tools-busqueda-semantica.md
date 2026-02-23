@@ -1,4 +1,5 @@
 # Laravel AI SDK: Streaming, Tools y búsqueda semántica
+Tercer artículo de una serie de 6 sobre Laravel AI SDK. Cubrimos streaming con SSE, broadcasting, queueing, tools personalizadas y provider tools (WebSearch, WebFetch, FileSearch), y búsqueda semántica con vectores en PostgreSQL
 
 ## Streaming
 
@@ -351,4 +352,4 @@ $documents = Document::query()
     ->get();
 ```
 
-**Próximo artículo:** Laravel AI SDK — Generación de imágenes
+**Próximo artículo:** Laravel AI SDK: Generación de imágenes

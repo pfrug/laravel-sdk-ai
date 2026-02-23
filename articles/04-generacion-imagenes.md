@@ -1,4 +1,5 @@
 # Laravel AI SDK: Generación de imágenes
+Cuarto artículo de una serie de 6 sobre Laravel AI SDK. Cubrimos generación de imágenes con OpenAI, Gemini y xAI, control de aspecto y calidad, uso de imágenes de referencia, almacenamiento y generación en background.
 
 La clase `Laravel\Ai\Image` permite generar imágenes usando los providers `openai`, `gemini` o `xai`:
 ```php
@@ -60,7 +61,7 @@ $path = $image->storePubliclyAs('image.jpg');
 
 ## Generación en background
 
-La generación de imágenes se puede encolar:
+La generación de imágenes se puede poner en cola:
 ```php
 use Laravel\Ai\Image;
 use Laravel\Ai\Responses\ImageResponse;
@@ -107,7 +108,7 @@ Image::assertNotGenerated('Missing prompt');
 Image::assertNothingGenerated();
 ```
 
-Para generación encolada:
+Para generación en cola:
 ```php
 use Laravel\Ai\Prompts\QueuedImagePrompt;
 
@@ -125,4 +126,4 @@ Para evitar generaciones sin fake definido, usamos `preventStrayImages()`:
 Image::fake()->preventStrayImages();
 ```
 
-**Próximo artículo:** Laravel AI SDK — Audio TTS y STT
+**Próximo artículo:** Laravel AI SDK: Audio TTS y STT

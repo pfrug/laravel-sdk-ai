@@ -1,4 +1,5 @@
 # Laravel AI SDK: Audio TTS y STT
+Quinto artículo de una serie de 6 sobre Laravel AI SDK. Cubrimos Text-to-Speech con selección de voces y generación de audio, Speech-to-Text con transcripción y diarización, almacenamiento y procesamiento en background
 
 ## Text-to-Speech (TTS)
 
@@ -201,4 +202,4 @@ Para evitar transcripciones sin fake definido:
 Transcription::fake()->preventStrayTranscriptions();
 ```
 
-**Próximo artículo:** Laravel AI SDK — Embeddings y Vector Stores
+**Próximo artículo:** Laravel AI SDK: Embeddings y Vector Stores
