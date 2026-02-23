@@ -1,4 +1,4 @@
-# Laravel AI SDK — Embeddings y Vector Stores
+# Laravel AI SDK: Embeddings y Vector Stores
 
 ## Generación de embeddings
 

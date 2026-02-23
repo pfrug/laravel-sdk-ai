@@ -1,4 +1,4 @@
-# Laravel AI SDK — Audio TTS y STT
+# Laravel AI SDK: Audio TTS y STT
 
 ## Text-to-Speech (TTS)
 

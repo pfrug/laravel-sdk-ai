@@ -1,4 +1,4 @@
-# Laravel AI SDK — Integración nativa de AI en Laravel 12
+# Laravel AI SDK: Integración nativa de AI en Laravel 12
 
 Hace unas semanas Laravel lanzó oficialmente su SDK para AI. Es un paquete que conecta Laravel con OpenAI, Anthropic, Gemini, xAI, Mistral, Groq, DeepSeek y otros providers desde una API unificada.
 

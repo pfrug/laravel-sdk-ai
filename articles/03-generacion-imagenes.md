@@ -1,4 +1,4 @@
-# Laravel AI SDK — Generación de imágenes
+# Laravel AI SDK: Generación de imágenes
 
 La clase `Laravel\Ai\Image` permite generar imágenes usando los providers `openai`, `gemini` o `xai`:
 ```php
