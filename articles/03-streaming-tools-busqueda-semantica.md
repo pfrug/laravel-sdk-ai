@@ -4,10 +4,10 @@
 
 El método `stream()` permite recibir la respuesta del agente de forma progresiva en lugar de esperar a que termine completamente. Devuelve un `StreamableAgentResponse` que puede retornarse directamente desde una ruta para enviar Server-Sent Events (SSE) al cliente:
 ```php
-use App\Ai\Agents\SalesCoach;
+use App\Ai\Agents\LaravelMentor;
 
-Route::get('/coach', function () {
-    return (new SalesCoach)->stream('Analizá esta transcripción...');
+Route::get('/mentor', function () {
+    return (new LaravelMentor)->stream('Listá brevemente las novedades de Laravel 12.');
 });
 ```
 
@@ -15,9 +15,9 @@ El método `then()` nos permite ejecutar lógica cuando el streaming termina:
 ```php
 use Laravel\Ai\Responses\StreamedAgentResponse;
 
-Route::get('/coach', function () {
-    return (new SalesCoach)
-        ->stream('Analizá esta transcripción...')
+Route::get('/mentor', function () {
+    return (new LaravelMentor)
+        ->stream('Listá brevemente las novedades de Laravel 12.')
         ->then(function (StreamedAgentResponse $response) {
             // Acceso a $response->text, $response->events, $response->usage
         });
@@ -26,7 +26,7 @@ Route::get('/coach', function () {
 
 También podemos iterar manualmente sobre los eventos:
 ```php
-$stream = (new SalesCoach)->stream('Analizá esta transcripción...');
+$stream = (new LaravelMentor)->stream('Listá brevemente las novedades de Laravel 12.');
 
 foreach ($stream as $event) {
     // Procesar cada evento
@@ -37,9 +37,9 @@ foreach ($stream as $event) {
 
 Para usar el protocolo de Vercel AI SDK en lugar de SSE estándar, invocamos `usingVercelDataProtocol()`:
 ```php
-Route::get('/coach', function () {
-    return (new SalesCoach)
-        ->stream('Analizá esta transcripción...')
+Route::get('/mentor', function () {
+    return (new LaravelMentor)
+        ->stream('Listá brevemente las novedades de Laravel 12.')
         ->usingVercelDataProtocol();
 });
 ```
@@ -50,7 +50,7 @@ Podemos broadcast los eventos de streaming directamente desde cada evento indivi
 ```php
 use Illuminate\Broadcasting\Channel;
 
-$stream = (new SalesCoach)->stream('Analizá esta transcripción...');
+$stream = (new LaravelMentor)->stream('Listá brevemente las novedades de Laravel 12.');
 
 foreach ($stream as $event) {
     $event->broadcast(new Channel('channel-name'));
@@ -59,8 +59,8 @@ foreach ($stream as $event) {
 
 O encolar el agente completo para que ejecute y haga broadcast automáticamente:
 ```php
-(new SalesCoach)->broadcastOnQueue(
-    'Analizá esta transcripción...',
+(new LaravelMentor)->broadcastOnQueue(
+    'Listá brevemente las novedades de Laravel 12.',
     new Channel('channel-name'),
 );
 ```
@@ -73,9 +73,9 @@ use Illuminate\Http\Request;
 use Laravel\Ai\Responses\AgentResponse;
 use Throwable;
 
-Route::post('/coach', function (Request $request) {
-    (new SalesCoach)
-        ->queue($request->input('transcript'))
+Route::post('/mentor', function (Request $request) {
+    (new LaravelMentor)
+        ->queue($request->input('prompt'))
         ->then(function (AgentResponse $response) {
             // Procesar respuesta
         })
@@ -89,7 +89,8 @@ Route::post('/coach', function (Request $request) {
 
 ## Tools
 
-Las tools permiten que los agentes ejecuten funcionalidad adicional durante el procesamiento. Se crean con Artisan:
+Las tools permiten que los agentes ejecuten funcionalidad adicional durante el procesamiento.
+Se puede crear con el siguiente comoando Artisan:
 ```bash
 php artisan make:tool RandomNumberGenerator
 ```
@@ -109,7 +110,7 @@ class RandomNumberGenerator implements Tool
 {
     public function description(): Stringable|string
     {
-        return 'Esta herramienta genera números aleatorios criptográficamente seguros.';
+        return 'Generates a cryptographically secure random number within a given range.';
     }
 
     public function handle(Request $request): Stringable|string
@@ -334,7 +335,7 @@ $documents = Document::query()
 El parámetro `$queryEmbedding` puede ser un array de floats o un string. Cuando es string, Laravel genera los embeddings automáticamente:
 ```php
 $documents = Document::query()
-    ->whereVectorSimilarTo('embedding', 'mejores bodegas en Napa Valley')
+    ->whereVectorSimilarTo('embedding', 'mejores rutas de senderismo en Mallorca')
     ->limit(10)
     ->get();
 ```

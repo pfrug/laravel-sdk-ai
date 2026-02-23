@@ -186,7 +186,7 @@
 						},
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"prompt\": \"Calificá esta frase de apertura en una línea: 'Hola, noté que tu empresa está creciendo rápido.'\"\n}"
+							"raw": "{\n\t\"prompt\": \"Explicame en pocas palabras el ciclo de vida de un request en Laravel.\"\n}"
 						}
 					}
 				},
@@ -215,7 +215,7 @@
 						},
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"prompt\": \"Cómo la mejorarías? En una oración.\",\n\t\"conversation_id\": \"{{conversation_id}}\"\n}"
+							"raw": "{\n\t\"prompt\": \"Explicame brevemente dónde interviene el middleware en ese flujo.\",\n\t\"conversation_id\": \"{{conversation_id}}\"\n}"
 						}
 					}
 				},
@@ -244,7 +244,85 @@
 						},
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"prompt\": \"El vendedor saludó, preguntó por los problemas del cliente y ofreció una demo.\"\n}"
+							"raw": "{\n\t\"prompt\": \"Evaluá este código: Route::get('/users', fn() => User::all());\"\n}"
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "03 — Streaming, Tools, Queue",
+			"item": [
+				{
+					"name": "Streaming (SSE)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/event-stream"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/stream?prompt=Listá brevemente las novedades de Laravel 12.",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "stream"],
+							"query": [
+								{
+									"key": "prompt",
+									"value": "Listá brevemente las novedades de Laravel 12."
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Tools (Calculator)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/tools",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "tools"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"prompt\": \"Generá un número aleatorio entre 1 y 100.\"\n}"
+						}
+					}
+				},
+				{
+					"name": "Queue",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/queue",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "queue"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"prompt\": \"En dos oraciones, diferencia entre queues y events en Laravel.\"\n}"
 						}
 					}
 				}

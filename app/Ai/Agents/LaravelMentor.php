@@ -15,13 +15,13 @@ use Stringable;
 
 #[Provider(Lab::Anthropic)]
 #[Temperature(0.7)]
-class SalesCoach implements Agent, Conversational, HasMiddleware
+class LaravelMentor implements Agent, Conversational, HasMiddleware
 {
     use Promptable, RemembersConversations;
 
     public function instructions(): Stringable|string
     {
-        return 'You are a sales coach. You analyze sales call transcripts and provide actionable feedback.';
+        return 'You are a Laravel expert. You answer questions about the framework concisely and with practical examples.';
     }
 
     public function middleware(): array

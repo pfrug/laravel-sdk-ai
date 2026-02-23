@@ -13,13 +13,13 @@ use Stringable;
 
 #[Provider(Lab::Anthropic)]
 #[Temperature(0.3)]
-class SalesAnalyzer implements Agent, HasStructuredOutput
+class CodeReviewer implements Agent, HasStructuredOutput
 {
     use Promptable;
 
     public function instructions(): Stringable|string
     {
-        return 'You are a sales analyst. You evaluate sales interactions and return structured scoring.';
+        return 'You are a code reviewer. You evaluate Laravel code snippets and return structured feedback.';
     }
 
     public function schema(JsonSchema $schema): array

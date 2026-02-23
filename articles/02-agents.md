@@ -4,10 +4,10 @@ El componente central del SDK es el agente. Un agente es una clase PHP que encap
 
 Se crea con Artisan:
 ```bash
-php artisan make:agent SalesCoach
+php artisan make:agent LaravelMentor
 ```
 
-Esto genera una clase en `app/Ai/Agents/SalesCoach.php` con la estructura base para implementar.
+Esto genera una clase en `app/Ai/Agents/LaravelMentor.php` con la estructura base para implementar.
 
 ## Estructura de un agente
 
@@ -20,27 +20,27 @@ namespace App\Ai\Agents;
 use Laravel\Ai\Contracts\Agent;
 use Laravel\Ai\Promptable;
 
-class SalesCoach implements Agent
+class LaravelMentor implements Agent
 {
     use Promptable;
 
     public function instructions(): string
     {
-        return 'Sos un coach de ventas. Analizás transcripciones y das feedback.';
+        return 'You are a Laravel expert. You answer questions about the framework concisely and with practical examples.';
     }
 }
 ```
 
 Para prompting básico:
 ```php
-$response = (new SalesCoach)->prompt('Analizá esta transcripción...');
+$response = (new LaravelMentor)->prompt('Explicame brevemente el ciclo de vida de un request en Laravel.');
 
 return (string) $response;
 ```
 
 El método `make()` resuelve el agente desde el service container permitiendo inyección de dependencias:
 ```php
-$response = SalesCoach::make(user: $user)->prompt('Analizá esta transcripción...');
+$response = LaravelMentor::make(user: $user)->prompt('Explicame brevemente el ciclo de vida de un request en Laravel.');
 ```
 
 ## Historial de conversación
@@ -50,7 +50,7 @@ Para que el agente tenga contexto de mensajes anteriores, implementamos la inter
 use Laravel\Ai\Contracts\Conversational;
 use Laravel\Ai\Messages\Message;
 
-class SalesCoach implements Agent, Conversational
+class LaravelMentor implements Agent, Conversational
 {
     use Promptable;
 
@@ -71,27 +71,27 @@ Para no gestionar el historial manualmente, usamos el trait `RemembersConversati
 ```php
 use Laravel\Ai\Concerns\RemembersConversations;
 
-class SalesCoach implements Agent, Conversational
+class LaravelMentor implements Agent, Conversational
 {
     use Promptable, RemembersConversations;
 
     public function instructions(): string
     {
-        return 'Sos un coach de ventas...';
+        return 'You are a Laravel expert...';
     }
 }
 ```
 
 Para iniciar una conversación nueva para un usuario:
 ```php
-$response = (new SalesCoach)->forUser($user)->prompt('Hola!');
+$response = (new LaravelMentor)->forUser($user)->prompt('Hola!');
 
 $conversationId = $response->conversationId;
 ```
 
 Para continuar una conversación existente:
 ```php
-$response = (new SalesCoach)
+$response = (new LaravelMentor)
     ->continue($conversationId, as: $user)
     ->prompt('Contame más sobre eso.');
 ```
@@ -103,7 +103,7 @@ Cuando necesitamos que el agente devuelva datos con una estructura definida en l
 use Illuminate\Contracts\JsonSchema\JsonSchema;
 use Laravel\Ai\Contracts\HasStructuredOutput;
 
-class SalesCoach implements Agent, HasStructuredOutput
+class LaravelMentor implements Agent, HasStructuredOutput
 {
     use Promptable;
 
@@ -119,7 +119,7 @@ class SalesCoach implements Agent, HasStructuredOutput
 
 La respuesta se accede como un array:
 ```php
-$response = (new SalesCoach)->prompt('Analizá esta transcripción...');
+$response = (new LaravelMentor)->prompt('Explicame brevemente el ciclo de vida de un request en Laravel.');
 
 $response['feedback'];
 $response['score'];
@@ -143,7 +143,7 @@ use Laravel\Ai\Enums\Lab;
 #[MaxTokens(4096)]
 #[Temperature(0.7)]
 #[Timeout(120)]
-class SalesCoach implements Agent
+class LaravelMentor implements Agent
 {
     use Promptable;
 }
@@ -168,8 +168,8 @@ class ComplexReasoner implements Agent
 
 Estos parámetros también se pueden pasar directamente al momento de hacer el prompt, lo que sobrescribe la configuración de la clase:
 ```php
-$response = (new SalesCoach)->prompt(
-    'Analizá esta transcripción...',
+$response = (new LaravelMentor)->prompt(
+    'Explicame brevemente el ciclo de vida de un request en Laravel.',
     provider: Lab::OpenAI,
     model: 'gpt-4o',
     timeout: 120,
@@ -182,7 +182,7 @@ Los agentes soportan middleware para interceptar y modificar prompts antes de qu
 ```php
 use Laravel\Ai\Contracts\HasMiddleware;
 
-class SalesCoach implements Agent, HasMiddleware
+class LaravelMentor implements Agent, HasMiddleware
 {
     use Promptable;
 
@@ -225,32 +225,32 @@ public function handle(AgentPrompt $prompt, Closure $next)
 
 El SDK incluye helpers para testear agentes sin hacer llamadas reales al provider:
 ```php
-use App\Ai\Agents\SalesCoach;
+use App\Ai\Agents\LaravelMentor;
 
 // Respuesta fija para todos los prompts
-SalesCoach::fake();
+LaravelMentor::fake();
 
 // Lista de respuestas en orden
-SalesCoach::fake([
+LaravelMentor::fake([
     'Primera respuesta',
     'Segunda respuesta',
 ]);
 
 // Respuesta dinámica basada en el prompt
-SalesCoach::fake(function (AgentPrompt $prompt) {
+LaravelMentor::fake(function (AgentPrompt $prompt) {
     return 'Respuesta para: ' . $prompt->prompt;
 });
 ```
 
 Y las aserciones correspondientes:
 ```php
-SalesCoach::assertPrompted('Analizá esta...');
+LaravelMentor::assertPrompted('Explicame brevemente...');
 
-SalesCoach::assertPrompted(function (AgentPrompt $prompt) {
+LaravelMentor::assertPrompted(function (AgentPrompt $prompt) {
     return $prompt->contains('transcripción');
 });
 
-SalesCoach::assertNeverPrompted();
+LaravelMentor::assertNeverPrompted();
 ```
 
 **Próximo artículo:** Laravel AI SDK — Streaming y herramientas

@@ -18,6 +18,9 @@ Route::post('/token', function (Request $request) {
 
 Route::prefix('agent')->group(function () {
     Route::post('/prompt', [AgentController::class, 'prompt']);
+    Route::post('/tools', [AgentController::class, 'tools']);
+    Route::get('/stream', [AgentController::class, 'stream']);
+    Route::post('/queue', [AgentController::class, 'queue']);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/conversation', [AgentController::class, 'conversation']);

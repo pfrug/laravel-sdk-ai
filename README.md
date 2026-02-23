@@ -34,8 +34,11 @@ OPENAI_API_KEY=
 |--------|------|-------------|------|
 | POST | `/api/token` | Genera token Sanctum | No |
 | POST | `/api/agent/prompt` | Prompt basico a un agente anonimo | No |
-| POST | `/api/agent/conversation` | Conversacion con historial (SalesCoach) | Si |
-| POST | `/api/agent/structured` | Salida estructurada (SalesAnalyzer) | Si |
+| POST | `/api/agent/conversation` | Conversacion con historial (LaravelMentor) | Si |
+| POST | `/api/agent/structured` | Salida estructurada (CodeReviewer) | Si |
+| GET | `/api/agent/stream` | Streaming SSE (LaravelMentor) | No |
+| POST | `/api/agent/tools` | Agente con tools (Calculator) | No |
+| POST | `/api/agent/queue` | Procesamiento en background | No |
 
 ## Estructura
 
@@ -43,8 +46,11 @@ OPENAI_API_KEY=
 app/
 ├── Ai/
 │   ├── Agents/
-│   │   ├── SalesCoach.php          # Conversacional, middleware
-│   │   └── SalesAnalyzer.php       # Salida estructurada
+│   │   ├── LaravelMentor.php        # Conversacional, middleware
+│   │   ├── CodeReviewer.php         # Salida estructurada
+│   │   └── Calculator.php          # Tools (RandomNumber, WebSearch)
+│   ├── Tools/
+│   │   └── RandomNumberGenerator.php
 │   └── Middleware/
 │       └── LogPrompts.php          # Log de prompts y respuestas
 ├── Http/
@@ -53,7 +59,8 @@ app/
 │   └── Requests/
 │       ├── PromptRequest.php
 │       ├── ConversationRequest.php
-│       └── StructuredRequest.php
+│       ├── StructuredRequest.php
+│       └── ToolRequest.php
 ```
 
 ## Postman
