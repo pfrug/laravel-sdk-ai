@@ -1,5 +1,5 @@
 # Laravel AI SDK: Embeddings y Vector Stores
-Sexto y último artículo de una serie de 6 sobre Laravel AI SDK. Cubrimos generación de embeddings, caché, búsqueda vectorial en PostgreSQL con pgvector, reranking de documentos y vector stores para RAG
+Sexto y último artículo de una serie de seis sobre Laravel AI SDK. Cubrimos generación de embeddings, caché, búsqueda vectorial en PostgreSQL con pgvector, reranking de documentos y vector stores para RAG
 
 ## Generación de embeddings
 
@@ -305,7 +305,7 @@ Embeddings::assertNotGenerated(
 Embeddings::assertNothingGenerated();
 ```
 
-Para generación encolada:
+Para generación en cola:
 ```php
 use Laravel\Ai\Prompts\QueuedEmbeddingsPrompt;
 

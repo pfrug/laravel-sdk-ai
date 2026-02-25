@@ -1,6 +1,6 @@
 # Laravel AI SDK: Agents
 
-El componente central del SDK es el agente. Un agente es una clase PHP que encapsula las instrucciones, el contexto de conversación, las herramientas disponibles y el esquema de salida para interactuar con un modelo de lenguaje.
+Segundo artículo de una serie de seis sobre Laravel AI SDK. Cubrimos la estructura de agentes como clases PHP, historial de conversación, salida estructurada, configuración con PHP attributes, middleware y testing.
 
 Se crea con Artisan:
 ```bash

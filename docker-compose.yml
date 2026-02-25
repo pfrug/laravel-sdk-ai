@@ -14,7 +14,7 @@ services:
       - .env
 
   pgsql:
-    image: postgres:17-alpine
+    image: pgvector/pgvector:pg17
     ports:
       - "${DB_PORT:-5432}:5432"
     environment:

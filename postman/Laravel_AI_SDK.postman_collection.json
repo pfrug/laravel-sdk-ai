@@ -382,6 +382,143 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "05 - Audio TTS y STT",
+			"item": [
+				{
+					"name": "Text to Speech",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/audio/tts",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "audio", "tts"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\": \"Me encanta programar con Laravel.\",\n\t\"voice\": \"female\"\n}"
+						}
+					}
+				},
+				{
+					"name": "Speech to Text",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/audio/stt",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "audio", "stt"]
+						},
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "audio",
+									"type": "file",
+									"src": ""
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "06 - Embeddings y Reranking",
+			"item": [
+				{
+					"name": "Generate Embeddings",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/embeddings",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "embeddings"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"input\": [\n\t\t\"Laravel es un framework PHP.\",\n\t\t\"Django es un framework Python.\"\n\t]\n}"
+						}
+					}
+				},
+				{
+					"name": "Vector Search",
+				"request": {
+					"method": "POST",
+					"header": [
+						{
+							"key": "Accept",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"url": {
+						"raw": "{{base_url_sdk_ai}}/agent/vector-search",
+						"host": ["{{base_url_sdk_ai}}"],
+						"path": ["agent", "vector-search"]
+					},
+					"body": {
+						"mode": "raw",
+						"raw": "{\n\t\"query\": \"how to define routes in Laravel\",\n\t\"limit\": 3\n}"
+					}
+				}
+			},
+			{
+				"name": "Rerank Documents",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_sdk_ai}}/agent/rerank",
+							"host": ["{{base_url_sdk_ai}}"],
+							"path": ["agent", "rerank"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"query\": \"frameworks PHP\",\n\t\"documents\": [\n\t\t\"Django es un framework web de Python.\",\n\t\t\"Laravel es un framework de aplicaciones web en PHP.\",\n\t\t\"React es una biblioteca JavaScript para interfaces de usuario.\"\n\t]\n}"
+						}
+					}
+				}
+			]
 		}
 	]
 }

@@ -1,5 +1,5 @@
 # Laravel AI SDK: Streaming, Tools y búsqueda semántica
-Tercer artículo de una serie de 6 sobre Laravel AI SDK. Cubrimos streaming con SSE, broadcasting, queueing, tools personalizadas y provider tools (WebSearch, WebFetch, FileSearch), y búsqueda semántica con vectores en PostgreSQL
+Tercer artículo de una serie de seis sobre Laravel AI SDK. Cubrimos streaming con SSE, broadcasting, queueing, tools personalizadas y provider tools (WebSearch, WebFetch, FileSearch), y búsqueda semántica con vectores en PostgreSQL
 
 ## Streaming
 
@@ -58,7 +58,7 @@ foreach ($stream as $event) {
 }
 ```
 
-O encolar el agente completo para que ejecute y haga broadcast automáticamente:
+O poner en cola el agente completo para que ejecute y haga broadcast automáticamente:
 ```php
 (new LaravelMentor)->broadcastOnQueue(
     'Listá brevemente las novedades de Laravel 12.',

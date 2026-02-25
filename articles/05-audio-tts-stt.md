@@ -1,5 +1,5 @@
 # Laravel AI SDK: Audio TTS y STT
-Quinto artículo de una serie de 6 sobre Laravel AI SDK. Cubrimos Text-to-Speech con selección de voces y generación de audio, Speech-to-Text con transcripción y diarización, almacenamiento y procesamiento en background
+Quinto artículo de una serie de seis sobre Laravel AI SDK. Cubrimos Text-to-Speech con selección de voces y generación de audio, Speech-to-Text con transcripción y diarización, almacenamiento y procesamiento en background
 
 ## Text-to-Speech (TTS)
 
@@ -21,7 +21,7 @@ $audio = Audio::of('Me encanta programar con Laravel.')
     ->generate();
 
 $audio = Audio::of('Me encanta programar con Laravel.')
-    ->voice('voice-id-or-name')
+    ->voice('nova') // voice id, or name. eg:alloy, echo, fable, onyx, nova, shimmer.
     ->generate();
 ```
 
@@ -29,7 +29,7 @@ El método `instructions()` permite guiar dinámicamente cómo debe sonar el aud
 ```php
 $audio = Audio::of('Me encanta programar con Laravel.')
     ->female()
-    ->instructions('Dicho como un pirata')
+    ->instructions('Con tono tranquilo y pausado')
     ->generate();
 ```
 
@@ -47,7 +47,7 @@ $path = $audio->storePubliclyAs('audio.mp3');
 
 ## Generación en background
 
-La generación de audio se puede encolar:
+La generación de audio se puede poner en cola:
 ```php
 use Laravel\Ai\Audio;
 use Laravel\Ai\Responses\AudioResponse;
@@ -84,7 +84,7 @@ $transcript = Transcription::fromStorage('audio.mp3')
 
 ## Transcripción en background
 
-La transcripción se puede encolar:
+La transcripción se puede poner en cola:
 ```php
 use Laravel\Ai\Transcription;
 use Laravel\Ai\Responses\TranscriptionResponse;
@@ -129,7 +129,7 @@ Audio::assertNotGenerated('Missing prompt');
 Audio::assertNothingGenerated();
 ```
 
-Para generación encolada:
+Para generación en cola:
 ```php
 use Laravel\Ai\Prompts\QueuedAudioPrompt;
 
@@ -182,7 +182,7 @@ Transcription::assertNotGenerated(
 Transcription::assertNothingGenerated();
 ```
 
-Para transcripción encolada:
+Para transcripción en cola:
 ```php
 use Laravel\Ai\Prompts\QueuedTranscriptionPrompt;
 

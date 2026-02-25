@@ -6,7 +6,7 @@ Repo con ejemplos funcionales del [Laravel AI SDK](https://laravel.com/docs/12.x
 
 - PHP 8.4
 - Laravel 12
-- PostgreSQL 17
+- PostgreSQL 17 + pgvector
 - Docker
 
 ## Setup
@@ -41,6 +41,11 @@ OPENAI_API_KEY=
 | POST | `/api/agent/queue` | Procesamiento en background | No |
 | POST | `/api/agent/image` | Generacion de imagen | No |
 | POST | `/api/agent/image/queue` | Generacion de imagen en background | No |
+| POST | `/api/agent/audio/tts` | Text-to-Speech | No |
+| POST | `/api/agent/audio/stt` | Speech-to-Text (file upload) | No |
+| POST | `/api/agent/embeddings` | Generacion de embeddings | No |
+| POST | `/api/agent/vector-search` | Busqueda vectorial con pgvector | No |
+| POST | `/api/agent/rerank` | Reranking de documentos | No |
 
 ## Estructura
 
@@ -58,6 +63,8 @@ app/
 ├── Http/
 │   ├── Controllers/
 │   │   ├── AgentController.php
+│   │   ├── AudioController.php
+│   │   ├── EmbeddingController.php
 │   │   ├── ImageController.php
 │   │   ├── StreamingController.php
 │   │   └── ToolController.php
@@ -66,7 +73,12 @@ app/
 │       ├── ConversationRequest.php
 │       ├── StructuredRequest.php
 │       ├── ToolRequest.php
-│       └── ImageRequest.php
+│       ├── ImageRequest.php
+│       ├── TtsRequest.php
+│       ├── SttRequest.php
+│       ├── EmbeddingRequest.php
+│       ├── VectorSearchRequest.php
+│       └── RerankRequest.php
 ```
 
 ## Postman

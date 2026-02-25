@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\AudioController;
+use App\Http\Controllers\EmbeddingController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\StreamingController;
 use App\Http\Controllers\ToolController;
@@ -28,6 +30,13 @@ Route::prefix('agent')->group(function () {
 
     Route::post('/image', [ImageController::class, 'generate']);
     Route::post('/image/queue', [ImageController::class, 'queue']);
+
+    Route::post('/audio/tts', [AudioController::class, 'tts']);
+    Route::post('/audio/stt', [AudioController::class, 'stt']);
+
+    Route::post('/embeddings', [EmbeddingController::class, 'embeddings']);
+    Route::post('/vector-search', [EmbeddingController::class, 'search']);
+    Route::post('/rerank', [EmbeddingController::class, 'rerank']);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/conversation', [AgentController::class, 'conversation']);
